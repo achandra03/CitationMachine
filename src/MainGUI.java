@@ -128,7 +128,15 @@ public class MainGUI extends Application
                                urlT = new URLTester(userUrl);
                                String date = urlT.getDate();
                                month.setText(getMonth(date));
-                             //  day.setText(getDay(date));
+                               try
+                               {
+                                   if(Integer.parseInt(getDay(date)) <= 31)
+                                       day.setText(getDay(date));
+                               }
+                               catch(NumberFormatException numex)
+                               {
+
+                               }
                                title.setText(urlT.getTitle());
 
                            }

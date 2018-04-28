@@ -3,6 +3,7 @@ import java.io.*;
 import java.util.ArrayList;
 public class URLTester 
 {
+  //TODO: Branch and change date function, gonna remove month abbreviations and just search for full month names
   private static URL url;
   private static ArrayList<String> arr;
   public URLTester(URL u)
@@ -45,41 +46,6 @@ public class URLTester
 	}
   }
   
- /* public static ArrayList <String> getContents() throws Exception
-  {
-		 BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-	     String inputLine;
-	     arr = new ArrayList<String>();
-	     boolean foundAuthor = false;
-	     while ((inputLine = in.readLine()) != null)
-	     {
-	    	      if(inputLine.contains("author") && !foundAuthor)
-	    	    	  {
-	    	    	   System.out.println(inputLine);
-	    	    	   System.out.println(findAuthor(inputLine));
-	    	    	   foundAuthor = true;
-	    	      }
-	          arr.add(inputLine.toUpperCase());
-	     }
-	     
-	     in.close();
-	     if(arr.size() <= 10)
-	     {
-	    	  arr = format(arr);
-	     }
-	     arr.remove(0); //Removing DOCTYPE HTML
-	     
-	     for(int i = 0; i < arr.size(); i++)
-	     {
-	    	    if((arr.get(i).contains("js")) || (arr.get(i).contains("script")) || (arr.get(i).contains("{")))
-	    	    {
-	    	    	 arr.remove(i);
-	    	    	 i--;
-	    	    }
-	     }
-	     return arr;
-  }
-  */
   public static String getDate()
   {
 	     String date = null;
@@ -192,79 +158,6 @@ public class URLTester
 			  monthFound = true;
 			  indexOfMonth = content.indexOf("DECEMBER");
 	      }
-	      else if(content.contains("JAN"))
-		  {
-			  month = "January"; 
-			  monthFound = true;
-			  indexOfMonth = content.indexOf("JAN");
-		  }
-		  else if (content.contains("FEB"))
-		  {
-			  month = "February";
-			  monthFound = true;
-			  indexOfMonth = content.indexOf("FEB");
-		  }
-		  else if (content.contains("MAR"))
-		  {
-			  month = "March";
-			  monthFound = true;
-			  indexOfMonth = content.indexOf("MAR");  
-		  }
-		  else if (content.contains("APR"))
-		  {
-			  month = "April";
-			  monthFound = true;
-			  indexOfMonth = content.indexOf("APR");
-		  }
-		  else if (content.contains("MAY"))
-		  {
-			  month = "May";
-			  monthFound = true;
-			  indexOfMonth = content.indexOf("MAY");
-		  }
-		  else if (content.contains("JUN"))
-		  {
-			  month = "June";
-			  monthFound = true;
-			  indexOfMonth = content.indexOf("JUN");
-		  }
-		  else if (content.contains("JUL"))
-		  {
-			  month = "July";
-			  monthFound = true;
-			  indexOfMonth = content.indexOf("JUL");
-		  }
-		  else if (content.contains("AUG"))
-		  {
-			  month = "August";
-			  monthFound = true;
-			  indexOfMonth = content.indexOf("AUG");
-		  }
-		  else if (content.contains("SEP"))
-		  {
-			  month = "September";
-			  monthFound = true;
-			  indexOfMonth = content.indexOf("SEP");
-		  }
-		  else if (content.contains("OCT"))
-		  {
-			  month = "October";
-			  monthFound = true;
-			  indexOfMonth = content.indexOf("OCT");
-			  System.out.println(content);
-		  }
-		  else if (content.contains("NOV"))
-		  {
-			  month = "November";
-			  monthFound = true;
-			  indexOfMonth = content.indexOf("NOV");
-		  }
-		  else if (content.contains("DEC"))
-		  {
-			  month = "December";
-			  monthFound = true;
-			  indexOfMonth = content.indexOf("DEC");  
-		  }
 	  int lastIndexOfDay = 0;
       for(int i = 0; i < content.length(); i++)
 	  {
@@ -348,7 +241,6 @@ public class URLTester
   
  public static void main (String args[]) throws Exception
  {
-  URLTester u = new URLTester(new URL("https://0xax.github.io/asm_1/"));
-  System.out.println(u.getTitle());
+
  }
 }
