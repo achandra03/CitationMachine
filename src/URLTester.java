@@ -3,7 +3,6 @@ import java.io.*;
 import java.util.ArrayList;
 public class URLTester 
 {
-  //TODO: Branch and change date function, gonna remove month abbreviations and just search for full month names
   private static URL url;
   private static ArrayList<String> arr;
   public URLTester(URL u)
@@ -45,7 +44,7 @@ public class URLTester
 		e.printStackTrace();
 	}
   }
-  
+
   public static String getDate()
   {
 	     String date = null;
