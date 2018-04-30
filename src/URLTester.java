@@ -103,11 +103,12 @@ public class URLTester
 			  monthFound = true;
 			  indexOfMonth = content.indexOf("MARCH");
 	      }
-	      else if(content.contains("APRIL"))
+	      else if(content.contains("APR"))
 	      {
 			  month = "April";
 			  monthFound = true;
-			  indexOfMonth = content.indexOf("APRIL");
+			  indexOfMonth = content.indexOf("APR");
+			  System.out.println(content);
 	      }
 	      else if(content.contains("MAY"))
 	      {
@@ -175,32 +176,23 @@ public class URLTester
 	  return month + " " + day + " " + year;
   }
   
-  public static String findAuthor (String content)
+  public static String findAuthor()
   {
-	  boolean onFirstName = true;
-	  String firstName = "";
-	  String lastName = "";
-	  for(int i = 0; i < content.length(); i++)
-	  {
-		  if(content.charAt(i) >= 65 && content.charAt(i) <= 90)
-		  {
-			  firstName += content.charAt(i);			  
-			  i++;
-			  while(i < content.length() && content.charAt(i) != ' ')
-			  {
-				  firstName += content.charAt(i);
-				  i++;
-			  }
-			  i++;
-			  while(i < content.length() && ((content.charAt(i) >= 65 && content.charAt(i) <= 90) || (content.charAt(i) >= 97 && content.charAt(i) <= 122)))
-			  {
-				  lastName += content.charAt(i);
-				  i++;
-			  }
-		  }
-	  }
-	  return firstName + " " + lastName;
+  	String author = "";
+    for(String s : arr)
+	{
+		if(s.contains("NAME") && s.contains("AUTHOR") && s.contains("META"))
+		{
+			for(int i = s.indexOf("CONTENT") + 9; s.charAt(i) != '\"'; i++)
+			{
+				author += s.charAt(i);
+			}
+			break;
+		}
+	}
+	return author;
   }
+
   public static ArrayList<String> format(ArrayList<String> arr)
   {
 	     //Some formatting for sites with video content? Checked only on https://www.cnn.com/2018/03/21/us/austin-explosions/index.html
@@ -228,9 +220,10 @@ public class URLTester
 	{
 		if(s.contains("<TITLE>"))
 		{
-			for(int i = s.indexOf('>') + 1; s.charAt(i) != '<'; i++)
+			for(int i = s.indexOf("<TITLE>") + 7; s.charAt(i) != '<'; i++)
 			{
-				title += s.charAt(i);
+				//if((s.charAt(i) >= 65 && s.charAt(i) <= 90) || (s.charAt(i) >= 97 && s.charAt(i) <= 122) || s.charAt(i) == 32 || s.charAt(i) == 45)
+				 title += s.charAt(i);
 			}
 			break;
 		}

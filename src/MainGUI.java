@@ -30,6 +30,19 @@ public class MainGUI extends Application
     {
         return s.substring(s.indexOf(' ') + 1, s.indexOf(' ') + 3);
     }
+    public String getYear(String s)
+    {
+        //Mark Zuckerberg once said "Move fast and break things" This is me moving fast and breaking things
+        if(s.contains("2018"))
+            return "2018";
+        if(s.contains("2019"))
+            return "2019";
+        if(s.contains("2020"))
+            return "2020";
+        if(s.contains("2021"))
+            return "2021";
+        return "";
+    }
 	public static void main (String args[])
 	{
         System.setProperty("webdriver.chrome.driver", "/Users/arnavchandra/Downloads/ChromeDriver/chromedriver");
@@ -133,12 +146,13 @@ public class MainGUI extends Application
                                    if(Integer.parseInt(getDay(date)) <= 31)
                                        day.setText(getDay(date));
                                }
-                               catch(NumberFormatException numex)
+                               catch(Exception e2)
                                {
 
                                }
+                               year.setText(getYear(date));
                                title.setText(urlT.getTitle());
-
+                               author.setText(urlT.findAuthor());
                            }
 	                       else if(!mal)
                            {
