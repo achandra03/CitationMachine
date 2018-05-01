@@ -140,6 +140,7 @@ public class MainGUI extends Application
                                URLTester urlT;
                                urlT = new URLTester(userUrl);
                                String date = urlT.getDate();
+                               System.out.println(date);
                                month.setText(getMonth(date));
                                try
                                {

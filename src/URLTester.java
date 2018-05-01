@@ -16,6 +16,7 @@ public class URLTester
 		boolean foundAuthor = false;
 		while ((inputLine = in.readLine()) != null)
 		{
+			//System.out.println(inputLine.toUpperCase());
 			if(inputLine.contains("author") && !foundAuthor)
 			{
 				foundAuthor = true;
@@ -24,20 +25,6 @@ public class URLTester
 		}
 
 		in.close();
-		if(arr.size() <= 10)
-		{
-			arr = format(arr);
-		}
-		arr.remove(0); //Removing DOCTYPE HTML
-
-		for(int i = 0; i < arr.size(); i++)
-		{
-			if((arr.get(i).contains("js")) || (arr.get(i).contains("script")) || (arr.get(i).contains("{")))
-			{
-				arr.remove(i);
-				i--;
-			}
-		}
 	}
 	catch(IOException e)
 	{
@@ -103,13 +90,19 @@ public class URLTester
 			  monthFound = true;
 			  indexOfMonth = content.indexOf("MARCH");
 	      }
-	      else if(content.contains("APR"))
+	      else if(content.contains("APRIL"))
 	      {
 			  month = "April";
 			  monthFound = true;
-			  indexOfMonth = content.indexOf("APR");
-			  System.out.println(content);
+			  indexOfMonth = content.indexOf("APRIL");
+			  //System.out.println(content);
 	      }
+	      else if (content.contains("APR"))
+		  {
+		  	month = "April";
+		  	monthFound = true;
+		  	indexOfMonth = content.indexOf("APR");
+		  }
 	      else if(content.contains("MAY"))
 	      {
 			  month = "May";
@@ -183,6 +176,7 @@ public class URLTester
 	{
 		if(s.contains("NAME") && s.contains("AUTHOR") && s.contains("META"))
 		{
+			System.out.println(s);
 			for(int i = s.indexOf("CONTENT") + 9; s.charAt(i) != '\"'; i++)
 			{
 				author += s.charAt(i);
