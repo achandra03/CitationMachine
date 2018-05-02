@@ -25,6 +25,9 @@ public class URLTester
 		}
 
 		in.close();
+		System.out.println(arr.size());
+		if(arr.size() < 30)
+			arr = format(arr);
 	}
 	catch(IOException e)
 	{
@@ -39,12 +42,14 @@ public class URLTester
 	     //Making a first pass, prioritizing specific words
 	     for(String s : arr)
 	     {
-	    	  if(s.contains("UPDATED") || s.contains("PUBLISHED") || s.contains("DATE") && !foundDate)
+	     	// System.out.println(s);
+	    	  if(s.contains("UPDATED") || s.contains("PUBLISH") || s.contains("DATE") && !foundDate)
 	    	  {
 		    	  date = findDate(s);
 		    	  if((!date.equals("" + " " + "" + " " + "")) && (!foundDate))
 		    	  {
 		    		  foundDate = true;
+		    		  break;
 		    	  }
 	    	  }	  
 	     }
@@ -108,6 +113,7 @@ public class URLTester
 			  month = "May";
 			  monthFound = true;
 			  indexOfMonth = content.indexOf("MAY");
+			  System.out.println(content);
 	      }
 	      else if(content.contains("JUNE"))
 	      {
@@ -174,7 +180,7 @@ public class URLTester
   	String author = "";
     for(String s : arr)
 	{
-		if(s.contains("NAME") && s.contains("AUTHOR") && s.contains("META"))
+		if(s.contains("AUTHOR") && s.contains("META") && s.contains("CONTENT"))
 		{
 			System.out.println(s);
 			for(int i = s.indexOf("CONTENT") + 9; s.charAt(i) != '\"'; i++)
@@ -184,7 +190,9 @@ public class URLTester
 			break;
 		}
 	}
-	return author;
+	if(author.contains(" ") && author.length() < 15)
+	 return author;
+    return "";
   }
 
   public static ArrayList<String> format(ArrayList<String> arr)
@@ -194,9 +202,9 @@ public class URLTester
 	      String newContent = "";
 	    	  for(int i = 0; i < arr.get(0).length(); i++)
 	    	  {
-	    		  if(arr.get(0).charAt(i) == '>')
+	    		  if(arr.get(0).charAt(i) == '/')
 	    		  {
-	    			  newContent += '>';
+	    			  newContent += "/>";
 	    			  newArr.add(newContent);
 	    			  newContent = "";
 	    		  }
@@ -214,6 +222,7 @@ public class URLTester
 	{
 		if(s.contains("<TITLE>"))
 		{
+			//System.out.println(s);
 			for(int i = s.indexOf("<TITLE>") + 7; s.charAt(i) != '<'; i++)
 			{
 				//if((s.charAt(i) >= 65 && s.charAt(i) <= 90) || (s.charAt(i) >= 97 && s.charAt(i) <= 122) || s.charAt(i) == 32 || s.charAt(i) == 45)

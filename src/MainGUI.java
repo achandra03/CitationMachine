@@ -28,7 +28,13 @@ public class MainGUI extends Application
 
     public String getDay(String s)
     {
-        return s.substring(s.indexOf(' ') + 1, s.indexOf(' ') + 3);
+        String day = "";
+        //return s.substring(s.indexOf(' ') + 1, s.indexOf(' ') + 3);
+        for(int i = s.indexOf(' ') + 1; s.charAt(i) != ' ' && s.charAt(i) != ','; i++)
+        {
+            day += s.charAt(i);
+        }
+        return day;
     }
     public String getYear(String s)
     {
@@ -41,6 +47,14 @@ public class MainGUI extends Application
             return "2020";
         if(s.contains("2021"))
             return "2021";
+        return "";
+    }
+    public String getPublisher(String s)
+    {
+        if(s.contains("|"))
+            return s.substring(s.indexOf('|') + 2);
+        if(s.contains("-"))
+            return s.substring(s.indexOf('-') + 2);
         return "";
     }
 	public static void main (String args[])
@@ -154,6 +168,8 @@ public class MainGUI extends Application
                                year.setText(getYear(date));
                                title.setText(urlT.getTitle());
                                author.setText(urlT.findAuthor());
+                               webTitle.setText(getPublisher(urlT.getTitle()));
+                               publisher.setText(getPublisher(urlT.getTitle()));
                            }
 	                       else if(!mal)
                            {
