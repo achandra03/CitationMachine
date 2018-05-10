@@ -21,11 +21,11 @@ public class URLTester
 			{
 				foundAuthor = true;
 			}
-			arr.add(inputLine.toUpperCase());
+			arr.add(inputLine);
 		}
 
 		in.close();
-		System.out.println(arr.size());
+		//System.out.println(arr.size());
 		if(arr.size() < 30)
 			arr = format(arr);
 	}
@@ -43,7 +43,7 @@ public class URLTester
 	     for(String s : arr)
 	     {
 	     	// System.out.println(s);
-	    	  if(s.contains("UPDATED") || s.contains("PUBLISH") || s.contains("DATE") && !foundDate)
+	    	  if(s.contains("updated") || s.contains("publish") || s.contains("date") && !foundDate)
 	    	  {
 		    	  date = findDate(s);
 		    	  if((!date.equals("" + " " + "" + " " + "")) && (!foundDate))
@@ -77,85 +77,85 @@ public class URLTester
 	  String year = "";
 	  boolean monthFound = false;
 	  int indexOfMonth = 0;
-	      if(content.contains("JANUARY"))
+	      if(content.contains("January"))
 	      {
 			  month = "January"; 
 			  monthFound = true;
-			  indexOfMonth = content.indexOf("JANUARY");
+			  indexOfMonth = content.indexOf("January");
 	      }
-	      else if(content.contains("FEBRUARY"))
+	      else if(content.contains("February"))
 	      {
 			  month = "February";
 			  monthFound = true;
-			  indexOfMonth = content.indexOf("FEBRUARY");
+			  indexOfMonth = content.indexOf("February");
 	      }
-	      else if(content.contains("MARCH"))
+	      else if(content.contains("March"))
 	      {
 			  month = "March";
 			  monthFound = true;
-			  indexOfMonth = content.indexOf("MARCH");
+			  indexOfMonth = content.indexOf("March");
 	      }
-	      else if(content.contains("APRIL"))
+	      else if(content.contains("April"))
 	      {
 			  month = "April";
 			  monthFound = true;
-			  indexOfMonth = content.indexOf("APRIL");
+			  indexOfMonth = content.indexOf("April");
 			  //System.out.println(content);
 	      }
-	      else if (content.contains("APR"))
+	      else if (content.contains("Apr"))
 		  {
 		  	month = "April";
 		  	monthFound = true;
-		  	indexOfMonth = content.indexOf("APR");
+		  	indexOfMonth = content.indexOf("Apr");
 		  }
-	      else if(content.contains("MAY"))
+	      else if(content.contains("May"))
 	      {
 			  month = "May";
 			  monthFound = true;
-			  indexOfMonth = content.indexOf("MAY");
-			  System.out.println(content);
+			  indexOfMonth = content.indexOf("May");
+			 // System.out.println(content);
 	      }
-	      else if(content.contains("JUNE"))
+	      else if(content.contains("June"))
 	      {
 			  month = "June";
 			  monthFound = true;
-			  indexOfMonth = content.indexOf("JUNE");
+			  indexOfMonth = content.indexOf("June");
 	      }
-	      else if(content.contains("JULY"))
+	      else if(content.contains("July"))
 	      {
 			  month = "July";
 			  monthFound = true;
-			  indexOfMonth = content.indexOf("JULY");
+			  indexOfMonth = content.indexOf("July");
 	      }
-	      else if(content.contains("AUGUST"))
+	      else if(content.contains("August"))
 	      {
 			  month = "August";
 			  monthFound = true;
-			  indexOfMonth = content.indexOf("AUGUST");
+			  indexOfMonth = content.indexOf("August");
 	      }
-	      else if(content.contains("SEPTEMBER"))
+	      else if(content.contains("September"))
 	      {
 			  month = "September";
 			  monthFound = true;
-			  indexOfMonth = content.indexOf("SEPTEMBER");
+			  indexOfMonth = content.indexOf("September");
 	      }
-	      else if(content.contains("OCTOBER"))
+	      else if(content.contains("October"))
 	      {
 			  month = "October";
 			  monthFound = true;
-			  indexOfMonth = content.indexOf("OCTOBER");
+			  indexOfMonth = content.indexOf("October");
 	      }
-	      else if(content.contains("NOVEMBER"))
+	      else if(content.contains("November"))
 	      {
 			  month = "November";
 			  monthFound = true;
-			  indexOfMonth = content.indexOf("NOVEMBER");
+			  indexOfMonth = content.indexOf("November");
 	      }
-	      else if(content.contains("DECEMBER"))
+	      else if(content.contains("December"))
 	      {
 			  month = "December";
 			  monthFound = true;
-			  indexOfMonth = content.indexOf("DECEMBER");
+			  indexOfMonth = content.indexOf("December");
 	      }
 	  int lastIndexOfDay = 0;
       for(int i = 0; i < content.length(); i++)
@@ -180,10 +180,10 @@ public class URLTester
   	String author = "";
     for(String s : arr)
 	{
-		if(s.contains("AUTHOR") && s.contains("META") && s.contains("CONTENT"))
+		if(s.contains("author") && s.contains("meta") && s.contains("content"))
 		{
 			System.out.println(s);
-			for(int i = s.indexOf("CONTENT") + 9; s.charAt(i) != '\"'; i++)
+			for(int i = s.indexOf("content") + 9; s.charAt(i) != '\"'; i++)
 			{
 				author += s.charAt(i);
 			}
@@ -220,10 +220,10 @@ public class URLTester
   	String title = "";
     for(String s: arr)
 	{
-		if(s.contains("<TITLE>"))
+		if(s.contains("<title>"))
 		{
 			//System.out.println(s);
-			for(int i = s.indexOf("<TITLE>") + 7; s.charAt(i) != '<'; i++)
+			for(int i = s.indexOf("<title>") + 7; s.charAt(i) != '<'; i++)
 			{
 				//if((s.charAt(i) >= 65 && s.charAt(i) <= 90) || (s.charAt(i) >= 97 && s.charAt(i) <= 122) || s.charAt(i) == 32 || s.charAt(i) == 45)
 				 title += s.charAt(i);

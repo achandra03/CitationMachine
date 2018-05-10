@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import javafx.scene.text.Text;
+import javafx.scene.text.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.control.Label;
@@ -20,6 +20,13 @@ public class MainGUI extends Application
 {
     URL userUrl;
 	Scene information;
+
+    public static final Font ITALIC_FONT =
+            Font.font(
+                    "Tahoma",
+                    FontPosture.ITALIC,
+                    Font.getDefault().getSize()
+            );
 
 	public String getMonth(String s)
     {
@@ -38,7 +45,6 @@ public class MainGUI extends Application
     }
     public String getYear(String s)
     {
-        //Mark Zuckerberg once said "Move fast and break things" This is me moving fast and breaking things
         if(s.contains("2018"))
             return "2018";
         if(s.contains("2019"))
@@ -52,9 +58,15 @@ public class MainGUI extends Application
     public String getPublisher(String s)
     {
         if(s.contains("|"))
+        {
+            s = s.substring(0, s.indexOf('|'));
             return s.substring(s.indexOf('|') + 2);
+        }
         if(s.contains("-"))
+        {
+            s = s.substring(0, s.indexOf('-'));
             return s.substring(s.indexOf('-') + 2);
+        }
         return "";
     }
 	public static void main (String args[])
@@ -135,6 +147,10 @@ public class MainGUI extends Application
         TextField year = new TextField();
         grid.add(year, 1, 8);
 
+        Button submitCitation = new Button();
+        submitCitation.setText("Generate!");
+        grid.add(submitCitation, 0, 9);
+
 	 submit.setOnAction(e -> {
 	                     boolean mal = false;
 	                     try
@@ -178,6 +194,27 @@ public class MainGUI extends Application
 	                     });
 	 grid1.add(submit, 1, 1);
 
+	 GridPane grid2 = new GridPane();
+	 grid2.setAlignment(Pos.CENTER);
+	 Text t = new Text("");
+	 grid2.add(t, 0, 0);
+	 Scene citationScene = new Scene(grid2, 400, 500);
+	 submitCitation.setOnAction(e -> {
+	     String citation = "";
+	     if(!(author.getText().length() < 1))
+	     {
+             System.out.println(author.getText());
+             String lastName = author.getText().substring(author.getText().indexOf(' ') + 1);
+             citation += lastName + ", ";
+             String firstName = author.getText().substring(0, author.getText().indexOf(' '));
+             citation += firstName;
+             citation += ".";
+         }
+         String titleOfArticle = title.getText();
+         citation += titleOfArticle;
+	     t.setText(citation);
+	     primaryStage.setScene(citationScene);
+     });
 
      Scene urlChecker = new Scene(grid1, 300, 150);
      information = new Scene(grid, 400, 500);
