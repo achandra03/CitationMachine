@@ -16,6 +16,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import java.net.*;
 import java.io.*;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 public class MainGUI extends Application
 {
     URL userUrl;
@@ -184,8 +186,8 @@ public class MainGUI extends Application
                                year.setText(getYear(date));
                                title.setText(urlT.getTitle());
                                author.setText(urlT.findAuthor());
-                               webTitle.setText(getPublisher(urlT.getTitle()));
-                               publisher.setText(getPublisher(urlT.getTitle()));
+                             //  webTitle.setText(getPublisher(urlT.getTitle()));
+                               //publisher.setText(getPublisher(urlT.getTitle()));
                            }
 	                       else if(!mal)
                            {
@@ -196,23 +198,39 @@ public class MainGUI extends Application
 
 	 GridPane grid2 = new GridPane();
 	 grid2.setAlignment(Pos.CENTER);
-	 Text t = new Text("");
-	 grid2.add(t, 0, 0);
+	 Label citation = new Label("");
+	 grid2.add(citation, 0, 0);
 	 Scene citationScene = new Scene(grid2, 400, 500);
 	 submitCitation.setOnAction(e -> {
-	     String citation = "";
+	     String cite = "";
 	     if(!(author.getText().length() < 1))
 	     {
              System.out.println(author.getText());
              String lastName = author.getText().substring(author.getText().indexOf(' ') + 1);
-             citation += lastName + ", ";
+             cite += lastName + ", ";
              String firstName = author.getText().substring(0, author.getText().indexOf(' '));
-             citation += firstName;
-             citation += ".";
+             cite += firstName;
+             cite += ".";
          }
+         if(!(day.getText().length() < 1))
+             cite += day.getText() + " ";
+	     if(!(month.getText().length() < 1))
+	         cite += month.getText() + " ";
+	     if(!(year.getText().length() < 1))
+	         cite += year.getText() + ". ";
          String titleOfArticle = title.getText();
-         citation += titleOfArticle;
-	     t.setText(citation);
+         cite += titleOfArticle;
+         citation.setWrapText(true);
+	     citation.setText(cite);
+	     Clipboard clipboard = Clipboard.getSystemClipboard();
+         ClipboardContent content = new ClipboardContent();
+         content.putString(cite);
+         clipboard.setContent(content);
+         Label information = new Label("I automatically copied the text for you, so you don't have to ctrl-c :)");
+         information.setWrapText(true);
+         //GridPane g3 = new GridPane();
+        // g3.setAlignment(Pos.BOTTOM_CENTER);
+       //  g3.add(information, 0, 0);
 	     primaryStage.setScene(citationScene);
      });
 

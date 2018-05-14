@@ -1,6 +1,8 @@
 import java.net.*;
 import java.io.*;
 import java.util.ArrayList;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 public class URLTester 
 {
   private static URL url;
@@ -25,7 +27,7 @@ public class URLTester
 		}
 
 		in.close();
-		//System.out.println(arr.size());
+		System.out.println(arr.size());
 		if(arr.size() < 30)
 			arr = format(arr);
 	}
@@ -182,7 +184,7 @@ public class URLTester
 	{
 		if(s.contains("author") && s.contains("meta") && s.contains("content"))
 		{
-			System.out.println(s);
+			//System.out.println(s);
 			for(int i = s.indexOf("content") + 9; s.charAt(i) != '\"'; i++)
 			{
 				author += s.charAt(i);
